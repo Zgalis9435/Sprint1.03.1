@@ -6,22 +6,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//Attributes
-		
+		// Attributes
+
 		HashSet<Month> nonModificableList = new HashSet<Month>();
-		List<Month> printableList = new ArrayList<Month>(nonModificableList);
+		ArrayList<Month> printableList = new ArrayList<Month>(nonModificableList);
 		Iterator<Month> it = printableList.iterator();
-		Scanner userEntry = new Scanner (System.in);
-		int userOption=0;
+		Scanner userEntry = new Scanner(System.in);
+		int userOption = 0;
 		int i = 0;
-		
-		//Month creation;
-		
+
+		// Month creation;
+
 		Month month1 = new Month("null");
 		month1.setName("Gener");
 		nonModificableList.add(month1);
@@ -57,10 +56,55 @@ public class Main {
 		Month month12 = new Month("null");
 		month12.setName("Desembre");
 		nonModificableList.add(month12);
-		
-		//Main code
-		
-		
-		
+
+		// Main code
+
+		while (userOption == 0) {
+			System.out
+			.println("Escull una opció:" + "\n 1. Veure la llista de mesos." + "\n 2. Introduir el mes faltant."
+					+ "\n 3. Ordenar la llista i mostrar-la per pantalla." + "\n 4. Sortir.");
+			switch (userOption) {
+
+			case 1:
+				System.out.println(nonModificableList.getClass().getName());
+				userOption = 0;
+				break;
+			case 2:
+				month8.setName(insertMonth());
+				nonModificableList.add(month8);
+				userOption=0;
+				break;
+			case 3:
+				
+			}
+
+		}
+
 	}
+
+	public static String insertMonth() {
+
+		// Attributes
+
+		Scanner sc = new Scanner(System.in);
+		String userMonth = "null";
+
+		// Method code
+
+		while (userMonth.equalsIgnoreCase(null)) {
+			System.out.println("Introdueix el mes faltant");
+			userMonth = sc.nextLine();
+			userMonth.trim();
+		}
+
+		return userMonth;
+	}
+	
+	public static Month finalList(HashSet<Month> nonModificableList, ArrayList<Month> printableList(nonModificableList)) throws IncompletListException{
+		
+		//Attributes
+		
+		if
+	}
+
 }
