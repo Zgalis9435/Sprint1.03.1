@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author ZGali
- *
- */
-module monthList {
-}
