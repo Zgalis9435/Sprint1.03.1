@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import monthList.Month.month;
 
 public class Main {
 	public static void main(String[] args) {
@@ -14,9 +13,9 @@ public class Main {
 
 		//Attributes
 		
-		HashSet<month> nonModificableList = new HashSet<month>();
-		List<month> printableList = new ArrayList<month>();
-		Iterator<month> it = printableList.iterator();
+		HashSet<Month> nonModificableList = new HashSet<Month>();
+		List<Month> printableList = new ArrayList<Month>();
+		Iterator<Month> it = printableList.iterator();
 		Scanner userEntry = new Scanner (System.in);
 		int userOption=0;
 		int i = 0;
