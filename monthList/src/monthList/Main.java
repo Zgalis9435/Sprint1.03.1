@@ -1,20 +1,21 @@
 package monthList;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IncompletListException {
 		// TODO Auto-generated method stub
 
 		// Attributes
 
 		HashSet<Month> nonModificableList = new HashSet<Month>();
-		ArrayList<Month> printableList = new ArrayList<Month>(nonModificableList);
-		Iterator<Month> it = printableList.iterator();
+		ArrayList<Month> printableList = new ArrayList<Month>();
 		Scanner userEntry = new Scanner(System.in);
 		int userOption = 0;
 		int i = 0;
@@ -23,66 +24,93 @@ public class Main {
 
 		Month month1 = new Month("null");
 		month1.setName("Gener");
-		nonModificableList.add(month1);
+		printableList.add(month1);
 		Month month2 = new Month("null");
 		month2.setName("Febrer");
-		nonModificableList.add(month2);
+		printableList.add(month2);
 		Month month3 = new Month("null");
 		month3.setName("Març");
-		nonModificableList.add(month3);
+		printableList.add(month3);
 		Month month4 = new Month("null");
 		month4.setName("Abril");
-		nonModificableList.add(month4);
+		printableList.add(month4);
 		Month month5 = new Month("null");
 		month5.setName("Maig");
-		nonModificableList.add(month5);
+		printableList.add(month5);
 		Month month6 = new Month("null");
 		month6.setName("Juny");
-		nonModificableList.add(month6);
+		printableList.add(month6);
 		Month month7 = new Month("null");
 		month7.setName("Juliol");
-		nonModificableList.add(month7);
+		printableList.add(month7);
 		Month month8 = new Month("null");
 		month8.setName("null");
 		Month month9 = new Month("null");
 		month9.setName("Septembre");
-		nonModificableList.add(month9);
+		printableList.add(month9);
 		Month month10 = new Month("null");
 		month10.setName("Octubre");
-		nonModificableList.add(month10);
+		printableList.add(month10);
 		Month month11 = new Month("null");
 		month11.setName("Novembre");
-		nonModificableList.add(month11);
+		printableList.add(month11);
 		Month month12 = new Month("null");
 		month12.setName("Desembre");
-		nonModificableList.add(month12);
-
+		printableList.add(month12);
+		nonModificableList.addAll(printableList);
+		Iterator<Month> it = nonModificableList.iterator();
 		// Main code
 
 		while (userOption == 0) {
 			System.out
 			.println("Escull una opció:" + "\n 1. Veure la llista de mesos." + "\n 2. Introduir el mes faltant."
 					+ "\n 3. Ordenar la llista i mostrar-la per pantalla." + "\n 4. Sortir.");
+			userOption = userEntry.nextInt();
 			switch (userOption) {
-
 			case 1:
-				System.out.println(nonModificableList.getClass().getName());
+				while (it.hasNext()) {
+					System.out.println(it.next().getName());
+				}
 				userOption = 0;
 				break;
 			case 2:
-				month8.setName(insertMonth());
-				nonModificableList.add(month8);
-				userOption=0;
-				break;
+				try {
+					month8.setName(insertMonth());
+					printableList.add(7, month8);
+					nonModificableList.addAll(printableList);
+					userOption = 0;
+					break;
+				} catch (CorrectMonthException e) {
+					System.out.println("El programa ha produit un error: " + e.getLocalizedMessage());
+					userOption=0;
+					break;
+				}
+
 			case 3:
-				
+				try {
+					if (exceptionIncomplet(nonModificableList)) {
+						for (i = 0; i < printableList.size(); i++) {
+							System.out.println(printableList.get(i).getName());
+						}
+						userOption = 0;
+						break;
+					}
+				}
+
+				catch (IncompletListException e) {
+					System.out.println("L'acció solicitada no es pot realitzar pel següent motiu: " + e.getMessage());
+					userOption = 0;
+					break;
+				}
+			case 4:
+				System.out.println("Fins després!");
 			}
 
 		}
 
 	}
 
-	public static String insertMonth() {
+	public static String insertMonth() throws CorrectMonthException {
 
 		// Attributes
 
@@ -91,20 +119,33 @@ public class Main {
 
 		// Method code
 
-		while (userMonth.equalsIgnoreCase(null)) {
+		while (userMonth.equalsIgnoreCase("null")) {
 			System.out.println("Introdueix el mes faltant");
 			userMonth = sc.nextLine();
-			userMonth.trim();
+			if (userMonth.trim().equalsIgnoreCase("agost")) {
+				userMonth = "Agost";
+			} else {
+				throw new CorrectMonthException("El mes no es correcte.");
+			}
 		}
 
 		return userMonth;
 	}
-	
-	public static Month finalList(HashSet<Month> nonModificableList, ArrayList<Month> printableList(nonModificableList)) throws IncompletListException{
-		
-		//Attributes
-		
-		if
+
+	public static boolean exceptionIncomplet(HashSet<Month> nonModificableList) throws IncompletListException {
+
+		// Attributes
+
+		boolean statusList = false;
+
+		// Method Code
+
+		if (nonModificableList.size() == 12) {
+			statusList = true;
+		} else {
+			throw new IncompletListException("La llista no es complerta, l'acció no es pot executar");
+		}
+		return statusList;
 	}
 
 }
